@@ -1,0 +1,25 @@
+// app global css in SCSS form
+.q-layout__section--marginal {
+    // background-color: ;
+}
+
+.q-drawer__content {
+    background: #3E46AF;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.router--active {
+    background-color: #fff;
+    color: #000 !important;
+}
+
+.sidebar-help {
+    position: absolute;
+    border-radius: 30px;
+    left: 15px;
+    bottom: 15px;
+    width: 220px;
+    height: 180px;
+    background-color: #22298D;
+}
