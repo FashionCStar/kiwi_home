@@ -1,20 +1,21 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar style="background-color: #fff" class="relative">
         <q-btn
           flat
           dense
           round
           icon="menu"
+          style="color: #5570E3"
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
         <q-tabs align="left">
-          <q-route-tab to="/dashboard/buy-sell" label="Buy & Sell" />
-          <q-route-tab to="/dashboard/safehouse/dashboard" label="Exchange" />
+          <q-route-tab to="/dashboard/safehouse/bonds" label="Buy & Sell" style="color: #5570E3" />
+          <q-route-tab to="/dashboard/safehouse/dashboard" label="Exchange" style="color: #5570E3" />
         </q-tabs>
-        <div class="q-py-sm">
+        <div class="q-py-sm absolute" style="right: 10px">
           <q-btn
             class="q-px-xs"
             text-color="white"
@@ -40,11 +41,13 @@
           Kiwi Home Assist
         </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <div style="overflow-y: auto; height: calc(100vh - 290px);">
+          <EssentialLink
+            v-for="link in essentialLinks"
+            :key="link.title"
+            v-bind="link"
+          />
+        </div>
 
         <q-item class="sidebar-help column" >
           <p class="text-center text-white q-pt-sm q-mb-none">
@@ -73,33 +76,52 @@ const linksList = [
     title: 'Dashboard',
     icon: 'dashboard_icn.svg',
     link: '/dashboard/safehouse/dashboard',
-    show: true
-  },
-  {
-    title: 'Dashboard',
-    icon: 'dashboard_icn.svg',
-    link: '/dashboard/buy-sell',
-    show: false
+    children: []
   },
   {
     title: 'Bonds',
     icon: 'bonds_icn.svg',
-    link: '/dashboard/safehouse/bonds'
+    link: '/dashboard/safehouse/bonds',
+    children: [
+      {
+        title: 'Bond Market1',
+        icon: 'bonds_icn.svg',
+        link: '/dashboard/safehouse/bonds-market1',
+      },
+      {
+        title: 'Bond Market2',
+        icon: 'bonds_icn.svg',
+        link: '/dashboard/safehouse/bonds-market2',
+      },
+      {
+        title: 'Bond Market3',
+        icon: 'bonds_icn.svg',
+        link: '/dashboard/safehouse/bonds-market3',
+      },
+      {
+        title: 'Depth Of Market',
+        icon: 'bonds_icn.svg',
+        link: '/dashboard/safehouse/depth-market',
+      },
+    ]
   },
   {
     title: 'Payments',
     icon: 'payments_icn.svg',
-    link: ''
+    link: '/dashboard/payment',
+    children: []
   },
   {
     title: 'Wallet',
     icon: 'wallet_icn.svg',
-    link: ''
+    link: '/dashboard/order-summary',
+    children: []
   },
   {
     title: 'Resources',
     icon: 'resources_icn.svg',
-    link: ''
+    link: '',
+    children: []
   }
 ];
 

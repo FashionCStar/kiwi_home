@@ -30,9 +30,24 @@ const routes = [
                 component: () => import('pages/dashboard/safehouse/bonds.vue') 
               },
               {
-                name: 'safehouse-bonds-market',
+                name: 'safehouse-bonds-market1',
                 path: 'bonds-market1',
                 component: () => import('src/pages/dashboard/safehouse/bonds-market1.vue') 
+              },
+              {
+                name: 'safehouse-bonds-market2',
+                path: 'bonds-market2',
+                component: () => import('src/pages/dashboard/safehouse/bonds-market2.vue') 
+              },
+              {
+                name: 'safehouse-bonds-market3',
+                path: 'bonds-market3',
+                component: () => import('src/pages/dashboard/safehouse/bonds-market3.vue') 
+              },
+              {
+                name: 'depth-market',
+                path: 'depth-market',
+                component: () => import('src/pages/dashboard/safehouse/depth-market.vue') 
               }
             ]
           },
@@ -40,6 +55,11 @@ const routes = [
             name: 'payment',
             path: 'payment',
             component: () => import('pages/dashboard/payment.vue') 
+          },
+          {
+            name: 'order-summary',
+            path: 'order-summary',
+            component: () => import('pages/dashboard/order-summary.vue') 
           },
           {
             name: 'buy-sell',

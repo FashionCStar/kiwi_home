@@ -5,7 +5,7 @@
       <q-form>
         <q-card class="q-ma-xs row" style="min-height: 530px">
           <div class="col-12 col-sm-6">
-            <q-card class="q-ma-xs" style="background-color: #F4F6F8;">
+            <q-card class="q-ma-xs" style="background-color: #F4F6F8; height: calc(100% - 8px)">
               <q-item>
                 <q-item-section>
                   <q-item-label class="text-bold">
@@ -111,14 +111,56 @@
             </q-card>
           </div>
           <div class="col-12 col-sm-6">
-            <q-card class="q-ma-xs" style="background-color: #1581ED">
-              <q-card-section class="q-pt-xl" style="color: #FFF">
+            <q-card class="q-ma-xs" style="background-color: #1581ED; height: calc(100% - 8px)">
+              <q-card-section class="q-py-lg" style="color: #FFF">
                 <span>Current credit card</span>
-                <q-card style="width: 200px; background-color: #3D93EA" class="q-pa-md">
+                <q-card style="width: 230px; background-color: #3D93EA; border-radius: 10px;" class="q-pa-md q-mt-sm">
                   <q-icon size="30px" >
                     <img :src="require('../../assets/images/icons/visa_icn.svg')" />
                   </q-icon>
+                  <div class="q-mt-lg" v-if="cardInfo.number.value">
+                    <span>{{convertCardNumber(cardInfo.number.value)}}</span>
+                  </div>
+                  <div class="q-mt-lg" v-else>
+                    <br/>
+                  </div>
+                  <div class="q-mt-sm" v-if="cardInfo.name.value">
+                    <span>{{cardInfo.name.value}}</span>
+                  </div>
+                  <div class="q-mt-sm" v-else>
+                    <br/>
+                  </div>
                 </q-card>
+                <div class="q-mt-md">
+                  <span>Name of card holder</span>
+                  <q-input dense filled outlined borderless v-model="cardInfo.name.value" style="background-color: #1881ED;" :input-style="{ color: '#fff' }" />
+                </div>
+                <div class="q-mt-md">
+                  <span>Credit card number</span>
+                  <q-input dense filled outlined borderless v-model="cardInfo.number.value" style="background-color: #1881ED;" :input-style="{ color: '#fff' }" mask="####   ####   ####   ####" fill-mask="•" unmasked-value>
+                    <template v-slot:append>
+                      <img height="32" :src="require('../../assets/images/cards_img.svg')">
+                    </template>
+                  </q-input>
+                </div>
+                <div class="row q-mt-md">
+                  <div class="col-6 q-pr-sm">
+                    <span>Expiration</span>
+                    <q-input dense filled outlined borderless v-model="cardInfo.expire_date.value" style="background-color: #1881ED;" :input-style="{ color: '#fff' }" mask="##/##" />
+                  </div>
+                  <div class="col-6 q-pl-sm">
+                    <span>CVV</span>
+                    <q-input dense filled outlined borderless v-model="cardInfo.cvv.value" style="background-color: #1881ED;" :input-style="{ color: '#fff' }" mask="###"/>
+                  </div>
+                </div>
+                <div class="row q-mt-lg">
+                  <div class="col-6 q-pr-sm">
+                    <q-btn flat label="Make Payment" style="background-color: #fff; color: #1581ED; width: 100%; border-radius: 8px;" />
+                  </div>
+                  <div class="col-6 q-pl-sm">
+                    <q-btn outline color="white" label="Cancel" style="width: 100%; border-radius: 8px;" />
+                  </div>
+                </div>
               </q-card-section>
             </q-card>
           </div>
@@ -129,10 +171,18 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: 'Payment',
   setup () {
+    function convertCardNumber(number) {
+      return number ? number.match(/.{1,4}/g).join('   ') : '';
+    }
     return {
+      convertCardNumber,
+      cardInfo: {
+        name: ref(""), number: ref(""), expire_date: ref(""), cvv: ref("")
+      },
       historySeries: [{
           name: "Projected Value",
           data: [13, 45, 38, 58, 69, 52, 79, 91, 148]

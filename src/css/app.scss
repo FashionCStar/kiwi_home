@@ -23,3 +23,7 @@
     height: 180px;
     background-color: #22298D;
 }
+
+.q-field--outlined .q-field__control, .q-field--filled .q-field__control {
+    border-radius: 8px;
+}
